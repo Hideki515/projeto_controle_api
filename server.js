@@ -8,6 +8,7 @@ import { getRevenuesByYearAndMonthRoute } from './src/routes/get-revenues-by-yea
 import { postRevenuesRoute } from './src/routes/post-revenues-route.js';
 import { patchRevenuesRoute } from './src/routes/patch-revenues-route.js';
 import { deleteRevenueByIdRoute } from './src/routes/delete-revenue-by-id-routes.js';
+import { postExpensesRoute } from './src/routes/post-expenses-route.js';
 
 const app = fastify();
 
@@ -39,6 +40,9 @@ app.register(getRevenuesByAccountRoute);
 app.register(getRevenuesByYearAndMonthRoute);
 app.register(patchRevenuesRoute);
 app.register(deleteRevenueByIdRoute);
+
+// Gastos
+app.register(postExpensesRoute);
 
 const start = async () => {
   try {
