@@ -5,7 +5,7 @@ export const getExpensesRoute = async (app) => {
     method: 'GET',
     url: '/expenses/list',
     schema: {
-      summery: 'List all expenses',
+      summary: 'List all expenses',
       tags: ['Expenses'],
       response: {
         200: {
