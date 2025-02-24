@@ -6,7 +6,7 @@ import swaggerUi from '@fastify/swagger-ui';
 import { getRevenuesByAccountRoute } from './src/routes/get-revenues-by-account-route.js';
 import { getRevenuesByYearAndMonthRoute } from './src/routes/get-revenues-by-yearAndMonth-route.js';
 import { postRevenuesRoute } from './src/routes/post-revenues.js';
-import { patchRevenuesRoute } from './src/routes/patch-revenues.js';
+import { patchRevenuesRoute } from './src/routes/patch-revenues-route.js';
 import { deleteRevenueByIdRoute } from './src/routes/delete-revenue-by-id-routes.js';
 
 const app = fastify();
