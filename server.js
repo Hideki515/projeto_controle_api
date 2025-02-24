@@ -10,6 +10,7 @@ import { patchRevenuesRoute } from './src/routes/patch-revenues-route.js';
 import { deleteRevenueByIdRoute } from './src/routes/delete-revenue-by-id-routes.js';
 import { postExpensesRoute } from './src/routes/post-expenses-route.js';
 import { getExpensesRoute } from './src/routes/get-expenses-route.js';
+import { getExpenseByAccountRoute } from './src/routes/get-expenses-by-account.js';
 
 const app = fastify();
 
@@ -45,6 +46,7 @@ app.register(deleteRevenueByIdRoute);
 // Gastos
 app.register(postExpensesRoute);
 app.register(getExpensesRoute);
+app.register(getExpenseByAccountRoute);
 
 const start = async () => {
   try {
