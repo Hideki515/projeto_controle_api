@@ -6,6 +6,7 @@ import swaggerUi from '@fastify/swagger-ui';
 import { getRevenuesByAccountRoute } from './src/routes/get-revenues-by-account.js';
 import { getRevenuesByYearAndMonthRoute } from './src/routes/get-revenues-by-yearAndMonth.js';
 import { postRevenuesRoute } from './src/routes/post-revenues.js';
+import { patchRevenuesRoute } from './src/routes/patch-revenues.js';
 
 const app = fastify();
 
@@ -30,10 +31,12 @@ app.register(swaggerUi, {
 });
 
 // Registrar rotas
+// Receitas
 app.register(postRevenuesRoute);
 app.register(getRevenuesRoute);
 app.register(getRevenuesByAccountRoute);
 app.register(getRevenuesByYearAndMonthRoute);
+app.register(patchRevenuesRoute);
 
 const start = async () => {
   try {
