@@ -1,20 +1,23 @@
 import db from '../database/db.js';
 
 export async function getRevenuesByYearAndMonthRoute(app) {
-  app.get('/revenues/:year/:month', {
+  app.route({
+    method: 'GET',
+    url: '/revenues/:year/:month',
     schema: {
       summary: 'Get revenues by month and year',
       tags: ['Revenues'],
       params: {
         type: 'object',
         properties: {
-          year: { type: 'string' },
-          month: { type: 'string' }
+          year: { type: 'integer' },
+          month: { type: 'integer', minimum: 1, maximum: 12 }
         },
         required: ['year', 'month']
       },
       response: {
         200: {
+          description: 'Successful response',
           type: 'object',
           properties: {
             revenues: {
@@ -22,9 +25,9 @@ export async function getRevenuesByYearAndMonthRoute(app) {
               items: {
                 type: 'object',
                 properties: {
-                  id: { type: 'number' },
+                  id: { type: 'integer' },
                   descricao: { type: 'string' },
-                  data: { type: 'string' },
+                  data: { type: 'string', format: 'date' },
                   valor: { type: 'number' },
                   conta: { type: 'string' }
                 }
@@ -32,39 +35,43 @@ export async function getRevenuesByYearAndMonthRoute(app) {
             }
           }
         },
+        400: {
+          description: 'Invalid parameters',
+          type: 'object',
+          properties: {
+            error: { type: 'string' }
+          }
+        },
         500: {
+          description: 'Internal server error',
           type: 'object',
           properties: {
             error: { type: 'string' },
-            details: { type: 'object' }
+            details: { type: 'string' }
           }
         }
       }
-    }
-  }, async (request, reply) => {
-    try {
-      const { year, month } = request.params;
+    },
+    handler: async (request, reply) => {
+      try {
+        const { year, month } = request.params;
 
-      // Convertendo para número
-      const yearNumber = Number.parseInt(year, 10);
-      const monthNumber = Number.parseInt(month, 10);
+        // Validação de entrada
+        if (!Number.isInteger(year) || !Number.isInteger(month) || month < 1 || month > 12) {
+          return reply.status(400).send({ error: 'Parâmetros inválidos. Ano e mês devem ser números inteiros válidos.' });
+        }
 
-      // Query para obter receitas
-      const [revenues] = await db.promise().query(
-        'SELECT * FROM revenues WHERE YEAR(data) = ?',
-        [yearNumber]
-      );
+        // Query SQL mais eficiente
+        const [revenues] = await db.promise().execute(
+          'SELECT * FROM revenues WHERE YEAR(data) = ? AND MONTH(data) = ? ORDER BY data DESC',
+          [year, month]
+        );
 
-      // Filtrar os resultados corretamente no JavaScript
-      const filteredRevenues = revenues.filter(revenue => {
-        const revenueMonth = new Date(revenue.data).getMonth() + 1; // 🔹 Ajuste correto do mês
-        return revenueMonth === monthNumber;
-      });
-
-      reply.send({ revenues: filteredRevenues });
-    } catch (err) {
-      console.error('Erro na consulta ao banco:', err);
-      reply.status(500).send({ error: 'Database query failed', details: err.message });
+        return reply.status(200).send({ revenues });
+      } catch (err) {
+        console.error('Erro na consulta ao banco:', err);
+        return reply.status(500).send({ error: 'Erro ao buscar receitas', details: err.message });
+      }
     }
   });
 }
