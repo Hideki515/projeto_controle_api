@@ -11,7 +11,7 @@ import { patchRevenuesRoute } from './src/routes/patch-revenues-route.js';
 import { deleteRevenueByIdRoute } from './src/routes/delete-revenue-by-id-routes.js';
 import { postExpensesRoute } from './src/routes/post-expenses-route.js';
 import { getExpensesRoute } from './src/routes/get-expenses-route.js';
-import { getExpenseByAccountRoute } from './src/routes/get-expenses-by-account.js';
+import { getExpenseByAccountRoute } from './src/routes/get-expenses-by-account-route.js';
 import { getExpensesByYearAndMonthRoute } from './src/routes/get-expenses-by-YearAndMonth-route.js';
 import { getExpensesByCategoryRoute } from './src/routes/get-expenses-by-category-route.js';
 
