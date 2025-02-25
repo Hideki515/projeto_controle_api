@@ -13,6 +13,7 @@ import { postExpensesRoute } from './src/routes/post-expenses-route.js';
 import { getExpensesRoute } from './src/routes/get-expenses-route.js';
 import { getExpenseByAccountRoute } from './src/routes/get-expenses-by-account.js';
 import { getExpensesByYearAndMonthRoute } from './src/routes/get-expenses-by-YearAndMonth-route.js';
+import { getExpensesByCategoryRoute } from './src/routes/get-expenses-by-category-route.js';
 
 const app = fastify();
 
@@ -57,6 +58,7 @@ app.register(postExpensesRoute);
 app.register(getExpensesRoute);
 app.register(getExpenseByAccountRoute);
 app.register(getExpensesByYearAndMonthRoute);
+app.register(getExpensesByCategoryRoute);
 
 const start = async () => {
   try {
