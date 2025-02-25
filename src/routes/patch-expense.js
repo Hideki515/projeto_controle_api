@@ -63,21 +63,21 @@ export const patchExpensesRoute = async (app) => {
         const { id } = request.params;
         const { descricao, data, valor, categoria, conta } = request.body;
 
-        // Atualizar a receita
+        // Atualizar a Despesa
         const [result] = await db.promise().execute(
           'UPDATE expenses SET descricao = ?, data = ?, valor = ?, categoria = ?, conta = ? WHERE id = ?',
           [descricao, data, valor, categoria, conta, id]
         );
 
         if (result.affectedRows === 0) {
-          return reply.status(404).send({ error: 'Receita não encontrada' });
+          return reply.status(404).send({ error: 'Despesa não encontrada' });
         }
 
         return reply.status(200).send({ id, descricao, data, valor, categoria, conta });
 
       } catch (err) {
-        console.error('Erro ao atualizar receita:', err);
-        return reply.status(500).send({ error: 'Erro ao atualizar receita' });
+        console.error('Erro ao atualizar despesa:', err);
+        return reply.status(500).send({ error: 'Erro ao atualizar despesa' });
       }
     },
   });
