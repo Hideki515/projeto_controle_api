@@ -16,7 +16,7 @@ import { getExpensesByYearAndMonthRoute } from './src/routes/get-expenses-by-Yea
 import { getExpensesByCategoryRoute } from './src/routes/get-expenses-by-category-route.js';
 import { patchExpensesRoute } from './src/routes/patch-expense.js';
 import { deleteExpenseByIdRoute } from './src/routes/delete-expense-by-id.js';
-import { postUserRoute } from './src/routes/post-users.js';
+import { postUserRoute } from './src/routes/post-users-route.js';
 import { getUsersRoute } from './src/routes/get-users.js';
 import { patchUsersByIdRoute } from './src/routes/patch-users-by-id-route.js';
 
