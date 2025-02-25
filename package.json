@@ -20,14 +20,14 @@
   "homepage": "https://github.com/Hideki515/projeto_controle#readme",
   "description": "",
   "dependencies": {
-    "@fastify/cors": "^10.0.2",
+    "@fastify/cors": "^10.1.0",
     "@fastify/swagger": "^9.4.2",
     "@fastify/swagger-ui": "^5.2.2",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.21.2",
-    "fastify": "^3.0.0",
-    "mysql2": "^2.0.0",
+    "fastify": "^5.2.1",
+    "mysql2": "^3.12.0",
     "zod": "^3.0.0"
   },
   "devDependencies": {

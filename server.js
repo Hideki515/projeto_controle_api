@@ -2,6 +2,7 @@ import { env } from './env.js';
 import fastify from 'fastify';
 import { getRevenuesRoute } from './src/routes/get-revenues-routes.js';
 import swagger from '@fastify/swagger';
+import fastifyCors from '@fastify/cors';
 import swaggerUi from '@fastify/swagger-ui';
 import { getRevenuesByAccountRoute } from './src/routes/get-revenues-by-account-route.js';
 import { getRevenuesByYearAndMonthRoute } from './src/routes/get-revenues-by-yearAndMonth-route.js';
@@ -11,8 +12,16 @@ import { deleteRevenueByIdRoute } from './src/routes/delete-revenue-by-id-routes
 import { postExpensesRoute } from './src/routes/post-expenses-route.js';
 import { getExpensesRoute } from './src/routes/get-expenses-route.js';
 import { getExpenseByAccountRoute } from './src/routes/get-expenses-by-account.js';
+import { getExpensesByYearAndMonthRoute } from './src/routes/get-expenses-by-YearAndMonth-route.js';
 
 const app = fastify();
+
+// Register CORS plugin
+app.register(fastifyCors, {
+  origin: '*', // Permitir todas as origens
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
+});
+
 
 // Configurar Swagger
 app.register(swagger, {
@@ -47,6 +56,7 @@ app.register(deleteRevenueByIdRoute);
 app.register(postExpensesRoute);
 app.register(getExpensesRoute);
 app.register(getExpenseByAccountRoute);
+app.register(getExpensesByYearAndMonthRoute);
 
 const start = async () => {
   try {
