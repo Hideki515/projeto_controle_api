@@ -17,7 +17,7 @@ import { getExpensesByCategoryRoute } from './src/routes/get-expenses-by-categor
 import { patchExpensesRoute } from './src/routes/patch-expense.js';
 import { deleteExpenseByIdRoute } from './src/routes/delete-expense-by-id.js';
 import { postUserRoute } from './src/routes/post-users-route.js';
-import { getUsersRoute } from './src/routes/get-users.js';
+import { getUsersRoute } from './src/routes/get-users-route.js';
 import { patchUsersByIdRoute } from './src/routes/patch-users-by-id-route.js';
 
 const app = fastify();
