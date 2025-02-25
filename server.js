@@ -19,6 +19,7 @@ import { deleteExpenseByIdRoute } from './src/routes/delete-expense-by-id-route.
 import { postUserRoute } from './src/routes/post-users-route.js';
 import { getUsersRoute } from './src/routes/get-users-route.js';
 import { patchUsersByIdRoute } from './src/routes/patch-users-by-id-route.js';
+import { deleteUserByIdRoute } from './src/routes/delete-user-by-id-route.js';
 
 const app = fastify();
 
@@ -71,6 +72,7 @@ app.register(deleteExpenseByIdRoute);
 app.register(postUserRoute);
 app.register(getUsersRoute);
 app.register(patchUsersByIdRoute);
+app.register(deleteUserByIdRoute);
 
 const start = async () => {
   try {
