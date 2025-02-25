@@ -14,13 +14,14 @@ import { getExpensesRoute } from './src/routes/get-expenses-route.js';
 import { getExpenseByAccountRoute } from './src/routes/get-expenses-by-account-route.js';
 import { getExpensesByYearAndMonthRoute } from './src/routes/get-expenses-by-YearAndMonth-route.js';
 import { getExpensesByCategoryRoute } from './src/routes/get-expenses-by-category-route.js';
+import { patchExpensesRoute } from './src/routes/patch-expense.js';
 
 const app = fastify();
 
 // Register CORS plugin
 app.register(fastifyCors, {
   origin: '*', // Permitir todas as origens
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
+  methods: ['GET', 'POST', 'PATCH', 'DELETE'], // Métodos permitidos
 });
 
 
@@ -59,6 +60,7 @@ app.register(getExpensesRoute);
 app.register(getExpenseByAccountRoute);
 app.register(getExpensesByYearAndMonthRoute);
 app.register(getExpensesByCategoryRoute);
+app.register(patchExpensesRoute);
 
 const start = async () => {
   try {
