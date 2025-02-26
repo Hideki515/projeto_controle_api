@@ -61,11 +61,6 @@ export const deleteExpenseByIdRoute = async (app) => {
           [id]
         );
 
-        // Verifica se a despesa existia antes de deletar
-        if (result.affectedRows === 0) {
-          return reply.status(404).send({ error: 'Despesa não encontrada' });
-        }
-
         return reply.status(200).send({ message: 'Despesa deletada com sucesso' });
       } catch (err) {
         console.error("Erro ao deletar despesa:", err);
