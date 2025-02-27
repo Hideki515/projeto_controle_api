@@ -77,14 +77,16 @@ app.register(deleteUserByIdRoute);
 
 const start = async () => {
   try {
-    await app.listen({ port: PORT });
-    console.log(`Servidor rodando em http://localhost:${PORT}`);
-    console.log(`Documentação disponível em http://localhost:${PORT}/docs`);
+    await app.listen({ port: PORT, host: '0.0.0.0' });
+    console.log(`🚀 Servidor rodando em http://0.0.0.0:${PORT}`);
+    console.log(`📄 Documentação disponível em http://0.0.0.0:${PORT}/docs`);
   } catch (err) {
-    console.error('Error starting server:', err);
-    app.log.error(err);
+    console.error('❌ Erro ao iniciar o servidor:', err);
     process.exit(1);
   }
 };
+
+start();
+
 
 start();
