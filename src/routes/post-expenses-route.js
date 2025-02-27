@@ -14,7 +14,7 @@ export const postExpensesRoute = async (app) => {
         properties: {
           descricao: { type: 'string' },
           data: { type: 'string', format: 'date' },
-          valor: { type: 'string' },
+          valor: { "type": "number", "multipleOf": 0.01 },
           categoria: { type: 'string' },
           conta: { type: 'string' },
         },
