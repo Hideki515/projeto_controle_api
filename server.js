@@ -22,6 +22,7 @@ import { patchUsersByIdRoute } from './src/routes/patch-users-by-id-route.js';
 import { deleteUserByIdRoute } from './src/routes/delete-user-by-id-route.js';
 
 const app = fastify();
+const PORT = env.PORT || 3000;
 
 // Register CORS plugin
 app.register(fastifyCors, {
@@ -76,7 +77,6 @@ app.register(deleteUserByIdRoute);
 
 const start = async () => {
   try {
-    const PORT = env.PORT || 3000;
     await app.listen({ port: PORT });
     console.log(`Servidor rodando em http://localhost:${PORT}`);
     console.log(`Documentação disponível em http://localhost:${PORT}/docs`);
