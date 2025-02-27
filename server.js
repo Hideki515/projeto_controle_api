@@ -22,12 +22,20 @@ import { patchUsersByIdRoute } from './src/routes/patch-users-by-id-route.js';
 import { deleteUserByIdRoute } from './src/routes/delete-user-by-id-route.js';
 
 const app = fastify();
-const PORT = env.PORT || 3000;
+const PORT = process.env.PORT || env.PORT || 3000; // Garante que a porta seja corretamente atribuída
 
-// Register CORS plugin
+console.log(`🔧 Inicializando servidor na porta: ${PORT}`);
+
+// // Register CORS plugin
+// app.register(fastifyCors, {
+//   origin: '*', // Permitir todas as origens
+//   methods: ['GET', 'POST', 'PATCH', 'DELETE'], // Métodos permitidos
+// });
+
 app.register(fastifyCors, {
-  origin: '*', // Permitir todas as origens
-  methods: ['GET', 'POST', 'PATCH', 'DELETE'], // Métodos permitidos
+  origin: true, // Permitir todas as origens dinâmicas
+  methods: ['GET', 'POST', 'PATCH', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
 });
 
 
@@ -37,13 +45,13 @@ app.register(swagger, {
     info: {
       title: 'API de Controle Financeiro',
       description: 'Documentação da API para controle de receitas e gastos.',
-      version: '1.0.0'
+      version: '1.0.0',
     },
-    host: 'localhost:2222',
+    host: `0.0.0.0:${PORT}`,
     schemes: ['http'],
     consumes: ['application/json'],
-    produces: ['application/json']
-  }
+    produces: ['application/json'],
+  },
 });
 
 // UI do Swagger (documentação visual)
@@ -77,7 +85,7 @@ app.register(deleteUserByIdRoute);
 
 const start = async () => {
   try {
-    await app.listen({ port: PORT, host: '0.0.0.0' });
+    await app.listen({ port: PORT, host: '0.0.0.0' }); // Corrigido para suportar o Render
     console.log(`🚀 Servidor rodando em http://0.0.0.0:${PORT}`);
     console.log(`📄 Documentação disponível em http://0.0.0.0:${PORT}/docs`);
   } catch (err) {
@@ -85,8 +93,5 @@ const start = async () => {
     process.exit(1);
   }
 };
-
-start();
-
 
 start();
