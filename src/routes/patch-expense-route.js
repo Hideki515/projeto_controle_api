@@ -4,7 +4,7 @@ export const patchExpensesRoute = async (app) => {
 
   app.route({
     method: 'PATCH',
-    url: '/expenses/:id',
+    url: '/api/v1/expenses/:id/',
     schema: {
       summary: 'Update an expense',
       tags: ['Expenses'],

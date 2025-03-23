@@ -4,7 +4,7 @@ export const postExpensesRoute = async (app) => {
 
   app.route({
     method: 'POST',
-    url: '/expenses',
+    url: '/api/v1/expenses/',
     schema: {
       summary: 'Create a expense',
       tags: ['Expenses'],

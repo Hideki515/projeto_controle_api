@@ -4,7 +4,7 @@ export const getUsersRoute = async (app) => {
 
   app.route({
     method: 'GET',
-    url: '/users',
+    url: '/api/v1/users/',
     schema: {
       summary: 'List all users',
       tags: ['Users'],

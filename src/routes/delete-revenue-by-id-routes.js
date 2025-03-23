@@ -3,7 +3,7 @@ import db from "../database/db.js";
 export const deleteRevenueByIdRoute = async (app) => {
   app.route({
     method: 'DELETE',
-    url: '/revenues/:id',
+    url: '/api/v1/revenues/:id/',
     schema: {
       summary: 'Delete a revenue by ID',
       tags: ['Revenues'],

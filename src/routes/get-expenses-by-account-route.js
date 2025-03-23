@@ -4,7 +4,7 @@ export const getExpenseByAccountRoute = async (app) => {
 
   app.route({
     method: 'GET',
-    url: '/expenses/account/:account',
+    url: '/api/v1/expenses/account/:account/',
     schema: {
       summary: 'List expenses by account',
       tags: ['Expenses'],

@@ -3,7 +3,7 @@ import db from '../database/db.js';
 export const patchRevenuesRoute = async (app) => {
   app.route({
     method: 'PATCH',
-    url: '/revenues/:id',
+    url: '/api/v1/revenues/:id/',
     schema: {
       summary: 'Update a revenue',
       tags: ['Revenues'],

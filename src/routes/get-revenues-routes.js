@@ -3,7 +3,7 @@ import db from '../database/db.js';
 export const getRevenuesRoute = async (app) => {
   app.route({
     method: 'GET',
-    url: '/revenues/list',
+    url: '/api/v1/revenues/list/',
     schema: {
       summary: 'List all revenues',
       tags: ['Revenues'],

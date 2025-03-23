@@ -3,7 +3,7 @@ import db from '../database/db.js';
 export const postUserRoute = async (app) => {
   app.route({
     method: 'POST',
-    url: '/api/v1/users',
+    url: '/api/v1/users/',
     schema: {
       summary: 'Create a user',
       tags: ['Users'],

@@ -3,7 +3,7 @@ import db from '../database/db.js';
 export async function getRevenuesByYearAndMonthRoute(app) {
   app.route({
     method: 'GET',
-    url: '/revenues/:year/:month',
+    url: '/api/v1/revenues/:year/:month/',
     schema: {
       summary: 'Get revenues by month and year',
       tags: ['Revenues'],

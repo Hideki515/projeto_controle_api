@@ -3,7 +3,7 @@ import db from '../database/db.js';
 export const postRevenuesRoute = async (app) => {
   app.route({
     method: 'POST',
-    url: '/revenues',
+    url: '/api/v1/revenues/',
     schema: {
       summary: 'Create a revenue',
       tags: ['Revenues'],

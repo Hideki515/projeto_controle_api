@@ -4,7 +4,7 @@ export const getExpensesByCategoryRoute = async (app) => {
 
   app.route({
     method: 'GET',
-    url: '/expenses/category/:category',
+    url: '/api/v1/expenses/category/:category/',
     schema: {
       summary: 'List expenses by category',
       tags: ['Expenses'],

@@ -4,7 +4,7 @@ export const patchUsersByIdRoute = async (app) => {
 
   app.route({
     method: 'PATCH',
-    url: '/users/:id',
+    url: '/api/v1/users/:id/',
     schema: {
       summary: 'Update user by ID',
       tags: ['Users'],
