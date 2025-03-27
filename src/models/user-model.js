@@ -34,3 +34,35 @@ export const getUsers = async () => {
   };
 
 };
+
+export const patchUserByUUID = async (UUID, email, password) => {
+
+  try {
+    const saltRounds = 10; // Definição de segurança
+    const hashedPassword = await bcrypt.hash(password, saltRounds); // Hash da senha
+
+    const result = await db.promise().execute('UPDATE users SET email = ?, password = ?  WHERE UUID = ?', [email, hashedPassword, UUID]);
+
+    return result;
+
+  } catch (error) {
+    console.error('Erro ao atualizar usuário:', error);
+    throw error;
+  };
+
+};
+
+export const verifyUUIDExists = async (UUID) => {
+
+  try {
+
+    const result = await db.promise().execute('SELECT UUID FROM users WHERE UUID = ?', [UUID]); // Verifica se UUID existe
+
+    return result; // Retorna resultado da verificação
+
+  } catch (error) {
+    console.error('Erro ao verificar UUID:', error);
+    throw error;
+  }
+
+};
