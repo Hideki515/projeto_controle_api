@@ -1,4 +1,4 @@
-import db from '../database/db.js';
+import { getUsersController } from '../controllers/user-controller.js'
 
 export const getUsersRoute = async (app) => {
 
@@ -18,9 +18,9 @@ export const getUsersRoute = async (app) => {
               items: {
                 type: 'object',
                 properties: {
-                  id: { type: 'integer' },
-                  name: { type: 'string' },
-                  username: { type: 'string' }
+                  UUID: { type: 'string' },
+                  email: { type: 'string' },
+                  created_at: { type: 'string' }
                 }
               }
             }
@@ -36,15 +36,6 @@ export const getUsersRoute = async (app) => {
         }
       }
     },
-    handler: async (request, reply) => {
-      try {
-        const [users] = await db.promise().execute('SELECT id, name, username FROM users');
-
-        return reply.status(200).send({ users });
-      } catch (error) {
-        reply.status(500).send({ error: 'Internal server error', details: error.message });
-      }
-    }
-  })
-
-}
+    handler: getUsersController,
+  });
+};

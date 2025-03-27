@@ -19,3 +19,18 @@ export const createUser = async (email, password) => {
     throw error;
   }
 };
+
+export const getUsers = async () => {
+
+  try {
+
+    const [users] = await db.promise().execute('SELECT UUID, email, created_at FROM users'); // Busca todos os usuários
+
+    return users; // Retorna todos os usuários
+
+  } catch (error) {
+    console.error('Erro ao buscar usuários:', error);
+    throw error;
+  };
+
+};

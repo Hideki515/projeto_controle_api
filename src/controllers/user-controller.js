@@ -1,4 +1,5 @@
 import { createUser } from '../models/user-model.js';
+import { getUsers } from '../models/user-model.js';
 
 export const postUserController = async (request, reply) => {
   try {
@@ -22,4 +23,16 @@ export const postUserController = async (request, reply) => {
     console.error('postUserController', error);
     return reply.status(500).send({ error: 'Internal server error', details: error.message });
   }
+};
+
+export const getUsersController = async (request, reply) => {
+  try {
+
+    const users = await getUsers(); // Busca todos os usuários
+
+    return reply.status(200).send({ users }); // Retorna a lista de usuários
+
+  } catch (error) {
+    return reply.status(500).send({ error: 'Internal server error', details: error.message });
+  };
 };
