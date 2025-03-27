@@ -20,6 +20,7 @@ export const getUsersRoute = async (app) => {
                 properties: {
                   UUID: { type: 'string' },
                   email: { type: 'string' },
+                  admin: { type: 'string' },
                   created_at: { type: 'string' }
                 }
               }

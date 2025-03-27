@@ -24,7 +24,7 @@ export const getUsers = async () => {
 
   try {
 
-    const [users] = await db.promise().execute('SELECT UUID, email, created_at FROM users'); // Busca todos os usuários
+    const [users] = await db.promise().execute('SELECT UUID, email, admin,created_at FROM users'); // Busca todos os usuários
 
     return users; // Retorna todos os usuários
 
