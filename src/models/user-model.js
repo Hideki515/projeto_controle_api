@@ -52,6 +52,20 @@ export const patchUserByUUID = async (UUID, email, password) => {
 
 };
 
+export const deleteUserByUUID = async (UUID) => {
+
+  try {
+
+    // Deleta usuário
+    await db.promise().execute('DELETE FROM users WHERE UUID = ?', [UUID]);
+
+  } catch (error) {
+    console.error('Erro ao deletar usuário:', error);
+    throw error;
+  };
+
+}
+
 export const verifyUUIDExists = async (UUID) => {
 
   try {
@@ -66,3 +80,4 @@ export const verifyUUIDExists = async (UUID) => {
   }
 
 };
+

@@ -2,6 +2,7 @@ import { createUser } from '../models/user-model.js';
 import { getUsers } from '../models/user-model.js';
 import { patchUserByUUID } from '../models/user-model.js';
 import { verifyUUIDExists } from '../models/user-model.js';
+import { deleteUserByUUID } from '../models/user-model.js';
 
 export const postUserController = async (request, reply) => {
   try {
@@ -73,4 +74,34 @@ export const patchUserByUUIDController = async (request, reply) => {
     return reply.status(500).send({ error: 'Internal server error', details: error.message });
   }
 
+};
+
+export const deleteUserByUUIDController = async (request, reply) => {
+  try {
+
+    // Extração do UUID
+    const { UUID } = request.params;
+
+    // Verifica se o usuário existe
+    const userExists = await verifyUUIDExists(UUID);
+
+    // Verificação se UUID existe
+    if (userExists[0].length === 0) {
+
+      // Retorno de erro
+      return reply.status(404).send({ error: 'Usuário não encontrado' });
+
+    } else {
+
+      // Deleção do usuário
+      await deleteUserByUUID(UUID);
+
+      // Retorno de sucesso
+      return reply.status(204).send();
+
+    };
+
+  } catch (error) {
+    return reply.status(500).send({ error: 'Internal server error', details: error.message });
+  }
 };
