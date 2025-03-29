@@ -113,6 +113,7 @@ import { getUsersRoute } from './src/routes/get-users-route.js';
 import { patchUsersByUUIDRoute } from './src/routes/patch-users-by-uuid-route.js';
 import { deleteUserByUUIDRoute } from './src/routes/delete-user-by-uuid-route.js';
 import { loginUserRoute } from './src/routes/login-user-route.js';
+import { getRevenusByUUIDRoute } from './src/routes/get-revenues-by-uuid-route.js';
 
 const app = fastify();
 
@@ -147,6 +148,7 @@ app.register(swaggerUi, {
 // Receitas
 app.register(postRevenuesRoute);
 app.register(getRevenuesRoute);
+app.register(getRevenusByUUIDRoute)
 app.register(getRevenuesByAccountRoute);
 app.register(getRevenuesByYearAndMonthRoute);
 app.register(patchRevenuesRoute);

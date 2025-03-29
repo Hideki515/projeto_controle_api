@@ -12,4 +12,22 @@ export const createRevenue = async (description, date, value, account, authToken
     console.error('Erro ao criar receita:', error);
     throw error;
   };
+
 };
+
+export const getRevenuesByUUID = async (authToken) => {
+
+  try {
+    const [rows] = await db.promise().query(
+      'SELECT * FROM revenues WHERE tokenUser = ?',
+      [authToken]
+    );
+
+    return rows;
+
+  } catch (error) {
+    console.error('Erro ao buscar receitas:', error);
+    throw error;
+  };
+
+}
