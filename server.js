@@ -96,14 +96,12 @@ import { getRevenuesRoute } from './src/routes/get-revenues-routes.js';
 import swagger from '@fastify/swagger';
 import fastifyCors from '@fastify/cors';
 import swaggerUi from '@fastify/swagger-ui';
-import { getRevenuesByAccountRoute } from './src/routes/get-revenues-by-account-route.js';
 import { getRevenuesByYearAndMonthRoute } from './src/routes/get-revenues-by-yearAndMonth-route.js';
 import { postRevenuesRoute } from './src/routes/post-revenues-route.js';
 import { patchRevenuesRoute } from './src/routes/patch-revenues-route.js';
 import { deleteRevenueByIdRoute } from './src/routes/delete-revenue-by-id-routes.js';
 import { postExpensesRoute } from './src/routes/post-expenses-route.js';
 import { getExpensesRoute } from './src/routes/get-expenses-route.js';
-import { getExpenseByAccountRoute } from './src/routes/get-expenses-by-account-route.js';
 import { getExpensesByYearAndMonthRoute } from './src/routes/get-expenses-by-YearAndMonth-route.js';
 import { getExpensesByCategoryRoute } from './src/routes/get-expenses-by-category-route.js';
 import { patchExpensesRoute } from './src/routes/patch-expense-route.js';
@@ -149,7 +147,6 @@ app.register(swaggerUi, {
 app.register(postRevenuesRoute);
 app.register(getRevenuesRoute);
 app.register(getRevenusByUUIDRoute)
-app.register(getRevenuesByAccountRoute);
 app.register(getRevenuesByYearAndMonthRoute);
 app.register(patchRevenuesRoute);
 app.register(deleteRevenueByIdRoute);
@@ -157,7 +154,6 @@ app.register(deleteRevenueByIdRoute);
 // Gastos
 app.register(postExpensesRoute);
 app.register(getExpensesRoute);
-app.register(getExpenseByAccountRoute);
 app.register(getExpensesByYearAndMonthRoute);
 app.register(getExpensesByCategoryRoute);
 app.register(patchExpensesRoute);
