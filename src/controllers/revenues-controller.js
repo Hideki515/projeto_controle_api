@@ -1,6 +1,6 @@
-import { request } from 'express';
 import { createRevenue } from '../models/revenues-model.js';
 import { getRevenuesByUUID } from '../models/revenues-model.js';
+import { updateRevenue } from '../models/revenues-model.js';
 
 // Controlador para criar uma nova receita
 export const postRevenueController = async (request, reply) => {
@@ -44,6 +44,28 @@ export const getRevenusByUUIDController = async (request, reply) => {
 
   } catch (error) {
     console.error('getRevenusByUUIDController', error);
+    return reply.status(500).send({ error: 'Internal server error', details: error.message });
+  }
+
+};
+
+export const patchRevenueController = async (request, reply) => {
+
+  try {
+
+    const { id } = request.params;
+    const { description, date, value, account, authToken } = request.body;
+
+    if (!id || !description || !date || !value || !account || !authToken) {
+      return reply.status(400).send({ error: 'Todos os campos são obrigatórios' });
+    }
+
+    const updatedRevenue = await updateRevenue(id, description, date, value, account, authToken);
+
+    return reply.status(200).send(updatedRevenue);
+
+  } catch (error) {
+    console.error('patchRevenueController', error);
     return reply.status(500).send({ error: 'Internal server error', details: error.message });
   }
 

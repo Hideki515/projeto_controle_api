@@ -30,4 +30,21 @@ export const getRevenuesByUUID = async (authToken) => {
     throw error;
   };
 
+};
+
+export const updateRevenue = async (id, description, date, value, account, authToken) => {
+
+  try {
+    await db.promise().execute(
+      'UPDATE revenues SET description = ?, date = ?, value = ?, account = ? WHERE id = ? AND tokenUser = ?',
+      [description, date, value, account, id, authToken]
+    );
+
+    return { id, description, date, value, account, authToken };
+
+  } catch (error) {
+    console.error('Erro ao atualizar receita:', error);
+    throw error;
+  };
+
 }
