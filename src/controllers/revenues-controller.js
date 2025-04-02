@@ -1,6 +1,7 @@
 import { createRevenue } from '../models/revenues-model.js';
 import { getRevenuesByUUID } from '../models/revenues-model.js';
 import { updateRevenue } from '../models/revenues-model.js';
+import { deleteRevenu } from '../models/revenues-model.js';
 
 // Controlador para criar uma nova receita
 export const postRevenueController = async (request, reply) => {
@@ -68,5 +69,29 @@ export const patchRevenueController = async (request, reply) => {
     console.error('patchRevenueController', error);
     return reply.status(500).send({ error: 'Internal server error', details: error.message });
   }
+
+};
+
+export const deleteRevenuController = async (request, reply) => {
+
+  try {
+
+    const { id } = request.params;
+    const { authToken } = request.body;
+
+    if (!id || !authToken) {
+      return reply.status(400).send({ error: 'ID e token de autenticação são obrigatórios' });
+    }
+
+    const result = await deleteRevenu(id, authToken);
+
+    return reply.status(200).send(result);
+
+  } catch (error) {
+
+    console.error('deleteRevenuController', error);
+    return reply.status(500).send({ error: 'Internal server error', details: error.message });
+
+  };
 
 };

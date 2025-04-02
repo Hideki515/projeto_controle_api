@@ -48,3 +48,23 @@ export const updateRevenue = async (id, description, date, value, account, authT
   };
 
 }
+
+export const deleteRevenu = async (id, authToken) => {
+
+  try {
+
+    await db.promise().execute(
+      'DELETE FROM revenues WHERE id = ? AND tokenUser = ?',
+      [id, authToken]
+    );
+
+    return { message: 'Receita deletada com sucesso' };
+
+  } catch (error) {
+
+    console.error('Erro ao deletar receita:', error);
+    throw error;
+
+  };
+
+};

@@ -1,4 +1,4 @@
-import db from "../database/db.js";
+import { deleteRevenuController } from '../controllers/revenues-controller.js';
 
 export const deleteRevenueByIdRoute = async (app) => {
   app.route({
@@ -13,6 +13,13 @@ export const deleteRevenueByIdRoute = async (app) => {
           id: { type: 'integer' }
         },
         required: ['id']
+      },
+      body: {
+        type: 'object',
+        required: ['authToken'],
+        properties: {
+          authToken: { type: 'string' },
+        },
       },
       response: {
         200: {
@@ -46,31 +53,6 @@ export const deleteRevenueByIdRoute = async (app) => {
         }
       }
     },
-    handler: async (request, reply) => {
-      try {
-        const { id } = request.params;
-
-        // Validação do ID
-        if (!Number.isInteger(Number(id))) {
-          return reply.status(400).send({ error: 'ID inválido. Deve ser um número inteiro.' });
-        }
-
-        // Executando a exclusão
-        const [result] = await db.promise().execute(
-          'DELETE FROM revenues WHERE id = ?',
-          [id]
-        );
-
-        // Verifica se a receita existia antes de deletar
-        if (result.affectedRows === 0) {
-          return reply.status(404).send({ error: 'Receita não encontrada' });
-        }
-
-        return reply.status(200).send({ message: 'Receita deletada com sucesso' });
-      } catch (err) {
-        console.error("Erro ao deletar receita:", err);
-        return reply.status(500).send({ error: 'Erro ao deletar receita', details: err.message });
-      }
-    }
+    handler: deleteRevenuController,
   });
 };
