@@ -101,8 +101,6 @@ import { patchRevenuesRoute } from './src/routes/patch-revenues-route.js';
 import { deleteRevenueByIdRoute } from './src/routes/delete-revenue-by-id-routes.js';
 import { postExpensesRoute } from './src/routes/post-expenses-route.js';
 import { getExpensesRoute } from './src/routes/get-expenses-route.js';
-import { getExpensesByYearAndMonthRoute } from './src/routes/get-expenses-by-YearAndMonth-route.js';
-import { getExpensesByCategoryRoute } from './src/routes/get-expenses-by-category-route.js';
 import { patchExpensesRoute } from './src/routes/patch-expense-route.js';
 import { deleteExpenseByIdRoute } from './src/routes/delete-expense-by-id-route.js';
 import { postUserRoute } from './src/routes/post-users-route.js';
@@ -152,8 +150,6 @@ app.register(deleteRevenueByIdRoute);
 // Gastos
 app.register(postExpensesRoute);
 app.register(getExpensesRoute);
-app.register(getExpensesByYearAndMonthRoute);
-app.register(getExpensesByCategoryRoute);
 app.register(patchExpensesRoute);
 app.register(deleteExpenseByIdRoute);
 
