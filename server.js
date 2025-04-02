@@ -92,7 +92,6 @@
 
 import { env } from './env.js';
 import fastify from 'fastify';
-import { getRevenuesRoute } from './src/routes/get-revenues-routes.js';
 import swagger from '@fastify/swagger';
 import fastifyCors from '@fastify/cors';
 import swaggerUi from '@fastify/swagger-ui';
@@ -145,7 +144,6 @@ app.register(swaggerUi, {
 // Registrar rotas
 // Receitas
 app.register(postRevenuesRoute);
-app.register(getRevenuesRoute);
 app.register(getRevenusByUUIDRoute)
 app.register(getRevenuesByYearAndMonthRoute);
 app.register(patchRevenuesRoute);
