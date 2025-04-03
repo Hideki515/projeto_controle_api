@@ -1,12 +1,18 @@
-import db from '../database/db.js';
+import { getExpensesController } from '../controllers/expenses-controller.js';
 
 export const getExpensesRoute = async (app) => {
   app.route({
     method: 'GET',
-    url: '/api/v1/expenses/list/',
+    url: '/api/v1/expenses/list/:authToken',
     schema: {
-      summary: 'List all expenses',
+      summary: 'List all expenses for a user',
       tags: ['Expenses'],
+      params: {
+        type: 'object',
+        properties: {
+          authToken: { type: 'string' }
+        },
+      },
       response: {
         200: {
           description: 'Successful response',
@@ -18,11 +24,12 @@ export const getExpensesRoute = async (app) => {
                 type: 'object',
                 properties: {
                   id: { type: 'integer' },
-                  descricao: { type: 'string' },
-                  data: { type: 'string' },
-                  valor: { type: 'string' },
-                  categoria: { type: 'string' },
-                  conta: { type: 'string' },
+                  description: { type: 'string' },
+                  date: { type: 'string' },
+                  category: { type: 'string' },
+                  value: { type: 'string' },
+                  account: { type: 'string' },
+                  tokenUser: { type: 'string' },
                 },
               },
             },
@@ -38,14 +45,6 @@ export const getExpensesRoute = async (app) => {
         },
       },
     },
-    handler: async (_request, reply) => {
-      try {
-        const [expenses] = await db.promise().execute('SELECT * FROM expenses ORDER BY data DESC');
-        return reply.status(200).send({ expenses });
-      } catch (err) {
-        console.error('Erro ao listar gastos:', err);
-        return reply.status(500).send({ error: 'Erro ao buscar gastos', details: err.message });
-      }
-    },
+    handler: getExpensesController,
   });
 };
