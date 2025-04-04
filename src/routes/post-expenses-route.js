@@ -1,4 +1,4 @@
-import db from '../database/db.js';
+import { postExpensesController } from '../controllers/expenses-controller.js'
 
 export const postExpensesRoute = async (app) => {
 
@@ -10,13 +10,14 @@ export const postExpensesRoute = async (app) => {
       tags: ['Expenses'],
       body: {
         type: 'object',
-        required: ['descricao', 'data', 'valor', 'categoria', 'conta'],
+        required: ['description', 'date', 'value', 'category', 'account', 'authToken'],
         properties: {
-          descricao: { type: 'string' },
-          data: { type: 'string', format: 'date' },
-          valor: { "type": 'string' },
-          categoria: { type: 'string' },
-          conta: { type: 'string' },
+          description: { type: 'string' },
+          date: { type: 'string', format: 'date' },
+          value: { "type": 'string' },
+          category: { type: 'string' },
+          account: { type: 'string' },
+          authToken: { type: 'string' },
         },
       },
       response: {
@@ -25,11 +26,12 @@ export const postExpensesRoute = async (app) => {
           type: 'object',
           properties: {
             id: { type: 'integer' },
-            descricao: { type: 'string' },
-            data: { type: 'string' },
-            valor: { type: 'string' },
-            categoria: { type: 'string' },
-            conta: { type: 'string' },
+            description: { type: 'string' },
+            date: { type: 'string' },
+            value: { type: 'string' },
+            category: { type: 'string' },
+            account: { type: 'string' },
+            authToken: { type: 'string' },
           },
         },
         400: {
@@ -49,27 +51,6 @@ export const postExpensesRoute = async (app) => {
         },
       },
     },
-    handler: async (request, reply) => {
-      const { descricao, data, valor, categoria, conta } = request.body;
-
-      // Vweiwrfica se os valores obrigatórios não estão vazios
-      if (!descricao || !data || !valor || !categoria || !conta) {
-        return reply.status(400).send({ error: 'All fields are required' });
-      }
-
-      try {
-        const [result] = await db.promise().execute(
-          'INSERT INTO expenses (descricao, data, valor, categoria, conta) VALUES (?, ?, ?, ?, ?)',
-          [descricao, data, valor, categoria, conta]
-        );
-
-        const id = result.insertId;
-
-        reply.status(201).send({ id, descricao, data, valor, categoria, conta });
-      } catch (error) {
-        console.error('postExpensesRoute', error);
-        reply.status(500).send({ error: 'Internal server error', details: error.message });
-      }
-    },
+    handler: postExpensesController,
   });
 };
