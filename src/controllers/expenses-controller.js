@@ -51,8 +51,6 @@ export const updateExpensesController = async (req, reply) => {
 
     const updatedExpense = await updateExpenses(id, description, date, value, category, account);
 
-    console.log('Updated expense:', updatedExpense);
-
     reply.status(200).send(updatedExpense);
 
   } catch (error) {
