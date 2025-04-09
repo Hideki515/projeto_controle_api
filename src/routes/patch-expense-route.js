@@ -1,4 +1,4 @@
-import db from '../database/db.js';
+import { updateExpensesController } from '../controllers/expenses-controller.js';
 
 export const patchExpensesRoute = async (app) => {
 
@@ -17,13 +17,13 @@ export const patchExpensesRoute = async (app) => {
       },
       body: {
         type: 'object',
-        required: ['descricao', 'data', 'valor', 'conta'],
+        required: ['description', 'date', 'value', 'category', 'account'],
         properties: {
-          descricao: { type: 'string' },
-          data: { type: 'string' },
-          valor: { type: 'string' },
-          categoria: { type: 'string' },
-          conta: { type: 'string' },
+          description: { type: 'string' },
+          date: { type: 'string' },
+          value: { type: 'string' },
+          category: { type: 'string' },
+          account: { type: 'string' },
         },
       },
       response: {
@@ -31,10 +31,11 @@ export const patchExpensesRoute = async (app) => {
           type: 'object',
           properties: {
             id: { type: 'integer' },
-            descricao: { type: 'string' },
-            data: { type: 'string' },
-            valor: { type: 'string' },
-            conta: { type: 'string' },
+            description: { type: 'string' },
+            date: { type: 'string' },
+            value: { type: 'string' },
+            category: { type: 'string' },
+            account: { type: 'string' },
           },
         },
         400: {
@@ -57,28 +58,6 @@ export const patchExpensesRoute = async (app) => {
         },
       },
     },
-    handler: async (request, reply) => {
-
-      try {
-        const { id } = request.params;
-        const { descricao, data, valor, categoria, conta } = request.body;
-
-        // Atualizar a Despesa
-        const [result] = await db.promise().execute(
-          'UPDATE expenses SET descricao = ?, data = ?, valor = ?, categoria = ?, conta = ? WHERE id = ?',
-          [descricao, data, valor, categoria, conta, id]
-        );
-
-        if (result.affectedRows === 0) {
-          return reply.status(404).send({ error: 'Despesa não encontrada' });
-        }
-
-        return reply.status(200).send({ id, descricao, data, valor, categoria, conta });
-
-      } catch (err) {
-        console.error('Erro ao atualizar despesa:', err);
-        return reply.status(500).send({ error: 'Erro ao atualizar despesa' });
-      }
-    },
+    handler: updateExpensesController,
   });
 };

@@ -35,3 +35,20 @@ export const listExpenses = async (authToken) => {
   }
 
 };
+
+export const updateExpenses = async (id, description, date, value, category, account) => {
+  try {
+
+    await db.promise().query(
+      'UPDATE expenses SET description = ?, date = ?, value = ?, category = ?, account = ? WHERE id = ?',
+      [description, date, value, category, account, id]
+    );
+
+    return { id, description, date, value, category, account };
+
+  } catch (error) {
+    console.error('Error updating expense:', error);
+    throw error;
+  }
+
+}
