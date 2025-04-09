@@ -1,4 +1,4 @@
-import db from "../database/db.js";
+import { deleteExpensesController } from '../controllers/expenses-controller.js';
 
 export const deleteExpenseByIdRoute = async (app) => {
   app.route({
@@ -46,26 +46,6 @@ export const deleteExpenseByIdRoute = async (app) => {
         }
       }
     },
-    handler: async (request, reply) => {
-      try {
-        const { id } = request.params;
-
-        // Validação do ID
-        if (!Number.isInteger(Number(id))) {
-          return reply.status(400).send({ error: 'ID inválido. Deve ser um número inteiro.' });
-        }
-
-        // Executando a exclusão
-        const [result] = await db.promise().execute(
-          'DELETE FROM expenses WHERE id = ?',
-          [id]
-        );
-
-        return reply.status(200).send({ message: 'Despesa deletada com sucesso' });
-      } catch (err) {
-        console.error("Erro ao deletar despesa:", err);
-        return reply.status(500).send({ error: 'Erro ao deletar despesa', details: err.message });
-      }
-    }
+    handler: deleteExpensesController,
   });
 };

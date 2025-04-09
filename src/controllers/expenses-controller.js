@@ -1,4 +1,4 @@
-import { createExpenses, listExpenses, updateExpenses } from '../models/expenses-model.js';
+import { createExpenses, listExpenses, updateExpenses, deleteExpense } from '../models/expenses-model.js';
 
 export const postExpensesController = async (req, resp) => {
 
@@ -57,5 +57,26 @@ export const updateExpensesController = async (req, reply) => {
     console.error('Error updating expense:', error);
     reply.status(500).send({ error: 'Internal Server Error' });
   }
+
+};
+
+export const deleteExpensesController = async (req, reply) => {
+
+  try {
+
+    const { id } = req.params;
+
+    if (!id) {
+      return reply.status(400).send({ error: 'ID é obrigatório' });
+    }
+
+    await deleteExpense(id);
+
+    reply.status(200).send({ message: 'Despesa deletada com sucesso' });
+
+  } catch (error) {
+    console.error('Error deleting expense:', error);
+    reply.status(500).send({ error: 'Internal Server Error' });
+  };
 
 };

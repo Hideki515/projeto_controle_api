@@ -52,3 +52,21 @@ export const updateExpenses = async (id, description, date, value, category, acc
   }
 
 }
+
+export const deleteExpense = async (id) => {
+
+  try {
+
+    await db.promise().query(
+      'DELETE FROM expenses WHERE id = ?',
+      [id]
+    );
+
+    return { message: 'Expense deleted successfully' };
+
+  } catch (error) {
+    console.error('Error deleting expense:', error);
+    throw error;
+  }
+
+};
